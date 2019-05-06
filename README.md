@@ -1,6 +1,6 @@
 ## **KALIMBOT** - A musical robot that plays the Kalimba
 
-[Kalimbot](kalimbot.jpg)
+![Kalimbot](kalimbot.jpg)
 
 Project on [Devpost](https://devpost.com/software/kalimbot)
 

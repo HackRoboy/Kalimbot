@@ -163,7 +163,7 @@ class LiveParser:
                 self.reset_clock()
         if self.counter_metronome > self.metronome:
             self.metronome = self.counter_metronome
-            print(self.metronome)
+            # print(self.metronome)
 
     def computer_play(self, prediction):
         """Plays MIDI notes from piano roll matrix.
@@ -273,7 +273,21 @@ class LiveParser:
         msg = message.bytes()
         # only append midi on and midi off notes
         if 128 <= msg[0] < 144:
-            self.client.publish("/kalimbot_midi", msg[1])
+            send_msg = (msg[1]%11) + 60
+            if send_msg == 61:
+                send_msg = 60
+            elif send_msg == 64:
+                send_msg = 62
+            elif send_msg == 65:
+                send_msg = 62
+            elif send_msg == 66:
+                send_msg = 67
+            elif send_msg == 68:
+                send_msg = 70
+            elif send_msg == 69:
+                send_msg = 70
+            print(send_msg)
+            self.client.publish("/kalimbot_midi", chr(send_msg))
 
     def parse_to_matrix(self):
         """Parses sequence of MIDI notes to a matrix of size (length,128).
